@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+
+  nginx:
+    build: build/nginx
+    container_name: ${CLIENT}.nginx.${ENV}
+    hostname: nginx
+    volumes:
+      - ../volume/nginx/etc.nginx.sites-enabled:/etc/nginx/sites-enabled
+      - ../volume/www:/home/www
+    restart: always
+
+  mysql:
+    build: build/mysql
+    container_name: ${CLIENT}.mysql.${ENV}
+    hostname: mysql
+    env_file: env/mysql.env
+    volumes:
+      - ../volume/mysql/var.lib.mysql:/var/lib/mysql
+    restart: always
+
+  php:
+    build: build/php
+    container_name: ${CLIENT}.php.${ENV}
+    hostname: php
+    volumes:
+      - ../volume/www:/home/www
+    restart: always

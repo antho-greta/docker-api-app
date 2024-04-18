@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  nginx:
+    networks:
+      - default
+      - frontnginx_front
+
+networks:
+  default:
+    driver: bridge
+  frontnginx_front:
+    external: true

@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+
+  nginx:
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../volume/www:/home/www:cached
+    restart: "no"
+
+  php:
+    volumes:
+      - ../volume/www:/home/www:cached
+    restart: "no"
+
+  mysql:
+    ports:
+      - "3306:3306"
+    restart: "no"
