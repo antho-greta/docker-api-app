@@ -11,7 +11,7 @@ RUN echo 'fr_FR.UTF-8 UTF-8' > /etc/locale.gen \
 	&& /usr/sbin/locale-gen
 
 RUN apt-get update \
-	&& apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libxslt-dev libicu-dev libxml2-dev libpq-dev libedit-dev mariadb-client libzip-dev nodejs npm \
+	&& apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libxslt-dev libicu-dev libxml2-dev libpq-dev libedit-dev mariadb-client libzip-dev \
 	&& apt-get install -y --no-install-recommends libmagickwand-dev \
 	&& docker-php-ext-configure gd --with-freetype --with-jpeg \
 	&& docker-php-ext-install -j4 gd xsl zip intl gettext soap pdo_pgsql pdo_mysql mysqli pgsql opcache \
@@ -21,6 +21,25 @@ RUN apt-get update \
 # apt-get install -y libgeoip-dev
 # pecl install geoip-1.1.1 imagick
 # docker-php-ext-enable geoip imagick
+
+# Installer nvm avec Node.js et npm
+ENV NVM_DIR /usr/local/nvm
+ENV NODE_VERSION 20.12.0
+
+RUN mkdir -p $NVM_DIR \
+	&& curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash \
+	&& . $NVM_DIR/nvm.sh \
+	&& nvm install $NODE_VERSION \
+	&& nvm alias default $NODE_VERSION \
+	&& nvm use default
+
+# Ajouter node et npm aux chemins
+ENV NODE_PATH $NVM_DIR/versions/node/v$NODE_VERSION/lib/node_modules
+ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
+# Vérifier l'installation
+RUN node -v
+RUN npm -v
 
 RUN { \
 	echo 'opcache.memory_consumption=128'; \
