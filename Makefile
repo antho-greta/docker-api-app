@@ -1,4 +1,3 @@
-
 CLIENT=<NOM_DU_PROJET>
 
 DOCKERCOMPOSE := $(shell command -v docker-compose 2> /dev/null)

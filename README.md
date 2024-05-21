@@ -30,7 +30,7 @@ MYSQL_PASSWORD=edcl56
 3. choisir quelle config on veux pour le projet symfony (une webapp ou une api)
    `$ composer require webapp` / ou `$ composer require api`
 
-## création du fichier de configuration pour le server de Symfony
+## (option 1) : Création du fichier de configuration pour le server de Symfony
 
 1. créer dans le dossier www/website/www un dossier conf
 2. dans le nouveau dossier www créer un fichier nginx-dev.conf
@@ -105,6 +105,14 @@ server {
 }
 ```
 
+## (option 2) : Cloner un projet pour l'inculre dans cet environnement
+
+1. Se positionner dans le dossier volume/www -> `cd volume/www`
+2. Dans ce dossier cloner le projet depuis git :
+   a ) clone depuis un projet total -> `git clone <URL_DU_PROJET> website`
+   b ) clone depuis une branch spécifique du projet -> `git --branch <NOM_DE_LA_BRANCHE> <URL_DU_PROJET> website`
+3. Modifer si besoins le nginx-dev.conf
+
 ## lancer la configuration
 
 1. placer vous au niveau du fichier Makefile
@@ -125,6 +133,11 @@ Celle-ci contient 3 container :
 -> `cd /home`
 -> `cd www/website/www`
 
+- commande pour installer les dépendances globales ->`composer install`
+- commande pour installer les dépendances node -> `npm install`
+- commande pour configurer le webpack -> `./node_modules/.bin/encore dev`
+
+- (autres commande utiles individuel en cas de besoins)
 - Doctrine -> `composer require doctrine`
 - ORM (collection de bibliothèque de symfony) -> `composer require symfony/orm-pack`
 - Collection de commande de symfony -> `composer require --dev symfony/maker-bundle`
