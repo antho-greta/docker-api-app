@@ -25,17 +25,17 @@ MYSQL_PASSWORD=edcl56
 
 ## installation de symfony dans le répertoire volume
 
+## (option 1) : Création du nouveau projet
+
 1. `$ composer create-project symfony/skeleton:^7.0 www/website/www`
 2. `$ cd www/website`
 3. choisir quelle config on veux pour le projet symfony (une webapp ou une api)
    `$ composer require webapp` / ou `$ composer require api`
 
-## (option 1) : Création du fichier de configuration pour le server de Symfony
-
-1. créer dans le dossier www/website/www un dossier conf
-2. dans le nouveau dossier www créer un fichier nginx-dev.conf
-3. dans ce fichier copier le code ci-dessous
-4. remplacer your_project_name par votre projet
+4. créer dans le dossier www/website/www un dossier conf
+5. dans le nouveau dossier www créer un fichier nginx-dev.conf
+6. dans ce fichier copier le code ci-dessous
+7. remplacer your_project_name par votre projet
 
 ```
 upstream website_php {
