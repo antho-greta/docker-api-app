@@ -33,6 +33,9 @@ docker-start:
 docker-stop:
 	$(DC) stop
 
+docker-bash:
+	docker exec -it $(CLIENT).php.$(ENV) bash -c "cd /home/www/website/www && exec bash"
+
 docker-restart: docker-stop docker-start
 
 docker-rm: docker-stop
