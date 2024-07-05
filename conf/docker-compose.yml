@@ -9,6 +9,11 @@ services:
     volumes:
       - ../volume/nginx/etc.nginx.sites-enabled:/etc/nginx/sites-enabled
       - ../volume/www:/home/www
+    ports:
+      - "80:80" # http
+    depends_on: # sert à attendre que les services soient prêts avant de démarrer
+      - php
+      - react
     restart: always
 
   mysql:
@@ -20,10 +25,18 @@ services:
       - ../volume/mysql/var.lib.mysql:/var/lib/mysql
     restart: always
 
-  php:
+  api:
     build: build/php
-    container_name: ${CLIENT}.php.${ENV}
+    container_name: ${CLIENT}.api.${ENV}
     hostname: php
+    volumes:
+      - ../volume/www:/home/www
+    restart: always
+
+  app:
+    build: build/react
+    container_name: ${CLIENT}.app.${ENV}
+    hostname: react
     volumes:
       - ../volume/www:/home/www
     restart: always
